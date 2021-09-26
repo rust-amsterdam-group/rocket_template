@@ -1,8 +1,8 @@
 #[macro_use]
 extern crate rocket;
 
-# [get("/")]
-asyhasync fn index() -> &'static str {
+#[get("/")]
+async fn index() -> &'static str {
     "Hello, world!"
 }
 
