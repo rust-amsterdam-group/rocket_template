@@ -14,7 +14,6 @@ RUN cargo chef cook --release --recipe-path recipe.json
 # Build application
 COPY . .
 ARG APP_NAME
-ENV APP_NAME $APP_NAME
 RUN cargo build --release --bin $APP_NAME
 
 FROM debian:buster-slim AS runtime
@@ -22,6 +21,4 @@ WORKDIR app
 ARG APP_NAME
 ENV APP_NAME $APP_NAME
 COPY --from=builder /app/target/release/$APP_NAME $APP_NAME
-ENV APP_ENVIRONMENT production
-ENV ROCKET_PORT $PORT
-ENTRYPOINT "./${APP_NAME}"
+ENTRYPOINT "ROCKET_PORT=$PORT ./$APP_NAME"
