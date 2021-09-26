@@ -24,4 +24,4 @@ ENV APP_NAME $APP_NAME
 COPY --from=builder /app/target/release/$APP_NAME $APP_NAME
 ENV APP_ENVIRONMENT production
 ENV ROCKET_PORT $PORT
-ENTRYPOINT ["./$APP_NAME"]
+ENTRYPOINT ["/bin/sh", "-c", "echo ${APP_NAME}"]
