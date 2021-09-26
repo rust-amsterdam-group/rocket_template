@@ -8,6 +8,14 @@ fn index() -> &'static str {
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![index])
+    set_port_if_provided();
+    rocket::build()
+        .mount("/", routes![index])
+}
+
+fn set_port_if_provided() {
+    if let Ok(port) = std::env::var("PORT") {
+        std::env::set_var("ROCKET_PORT", port);
+    }
 }
 
