@@ -1,16 +1,16 @@
 #[macro_use]
 extern crate rocket;
 
-#[get("/")]
-async fn index() -> &'static str {
-    "Hello, world!"
-}
+mod routes;
+
 
 #[launch]
 fn rocket() -> _ {
     set_cgr_config_if_required();
     rocket::build()
-        .mount("/", routes![index])
+        .mount("/", routes![routes::index])
+        .mount("/", routes![routes::search])
+        .manage(reqwest::Client::new())
 }
 
 fn set_cgr_config_if_required() {
