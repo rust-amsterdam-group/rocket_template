@@ -1,9 +1,9 @@
-ARG APP_NAME=rocket_cloud
-ARG RUST_VERSION=1.51.0
+ARG APP_NAME=rocket_template
+ARG RUST_VERSION=1.55.0
 ARG CARGO_CHEF_VERSION="=0.1.31"
 ARG USERNAME=runner
 
-FROM ekidd/rust-musl-builder:$RUST_VERSION AS chef
+FROM clux/muslrust:${RUST_VERSION}-stable AS chef
 USER root
 ARG CARGO_CHEF_VERSION
 RUN cargo install cargo-chef --version $CARGO_CHEF_VERSION
